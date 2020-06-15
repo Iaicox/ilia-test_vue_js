@@ -1,28 +1,76 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header>
+        <div class="logo">E-shop</div>
+        <div class="cart">
+            <button class="btn-cart" type="button" @click="$refs.cart.cartVisible = !$refs.cart.cartVisible">Корзина</button>
+            <cart ref="cart"></cart>
+        </div>
+    </header>
+    <main>
+        <catalog></catalog>
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import catalog from './components/Catalog'
+import cart from './components/Cart'
 
 export default {
   name: 'App',
+  methods: {
+      getJSON(url) {
+          return fetch(url)
+              .then(result => result.json())
+              .catch(err => {
+                  console.error(err)
+              })
+      },
+      postJSON(url, data) {
+          return fetch(url, {
+              method: 'POST',
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+          })
+              .then(result => result.json())
+              .catch(err => {
+                  console.error(err)
+              })
+      },
+      putJSON(url, data) {
+          return fetch(url, {
+              method: 'PUT',
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+          })
+              .then(result => result.json())
+              .catch(err => {
+                  console.error(err)
+              })
+      },
+      deleteJSON(url, data) {
+          return fetch(url, {
+              method: 'DELETE',
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+          })
+              .then(result => result.json())
+              .catch(err => {
+                  console.error(err)
+              })
+      }
+  },
+  mounted() {},
   components: {
-    HelloWorld
+      catalog,
+      cart
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

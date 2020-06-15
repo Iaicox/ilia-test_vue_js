@@ -1,3 +1,6 @@
+// подключаем стили
+import '@/styles/normalize.css';
+import '@/styles/style.css';
 import Vue from 'vue'
 import App from './App.vue'
 
