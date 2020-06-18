@@ -34,7 +34,7 @@ export default {
                                 let randDol = 67
                                 item.name = names[item.G].B[item.T].N
                                 item.group_name = names[item.G].G
-                                item.cur_price = item.C * randDol
+                                item.cur_price = (item.C * randDol).toFixed(2)
                                 item.prev_price = 0
                                 if (!(this.groups.includes(item.group_name))) {
                                     this.groups.push(item.group_name)
