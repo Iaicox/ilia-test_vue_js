@@ -2,9 +2,7 @@
     <div class="products">
         <div class="products-groups" v-for="(group, index) of groups" :key="index">
             <h2>{{group}}</h2>
-            <div v-for="product of products" :key="(product.G+'-'+product.T)">
-                <product v-if="group == product.group_name" :item="product" />
-            </div>
+            <product v-for="product of filteredItems(group)" :item="product" :key="(product.G+'-'+product.T)" />
         </div>
     </div>
 </template>
@@ -58,6 +56,9 @@ export default {
                     })
                 }
             })
+        },
+        filteredItems(group) {
+            return this.products.filter((product) => product.group_name === group)
         }
     },
     mounted() {
@@ -93,11 +94,12 @@ export default {
         flex-wrap: wrap;
     }
 
-    .products-groups > div {
+    .product-item {
         flex-basis: calc(50% - 4px);
         padding: 6px 10px;
         box-sizing: border-box;
         margin: 2px;
+        border: 1px solid #353535;
     }
 
     .buy-btn {
